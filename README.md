@@ -26,47 +26,49 @@ Things you may want to cover:
 ## Tabel名
 
 ## users
-|Column             |Type     |Options|
-|id                 |INT      |-------|
-|nickname           |VARCHAR  |-------|
-|email              |VARCHAR  |-------|
-|encrypted_password |VARCHAR  |-------|
-|first_name         |VARCHAR  |-------|
-|last_name          |VARCHAR  |-------|
-|reading_first_name |VARCHAR  |-------|
-|reading_last_name  |VARCHAR  |-------|
-|birthday           |DATATIME |-------|
+|Column             |Type       |Options              |
+|id                 |integer    |PRIMARY KEY          |
+|nickname           |string     |NOT NULL             |
+|email              |string     |NOT NULL, UNIQUE KEY |
+|encrypted_password |string     |NOT NULL             |
+|first_name         |string     |NOT NULL             |
+|last_name          |string     |NOT NULL             |
+|reading_first_name |string     |NOT NULL             |
+|reading_last_name  |string     |NOT NULL             |
+|birthday           |date       |NOT NULL             |
 
 ## addresses
-|Column             |Type     |Options|
-|id                 |INT      |-------|
-|user               |INT      |-------|
-|post_code          |VARCHAR  |-------|
-|prefectures        |VARCHAR  |-------|
-|area_id            |INT      |-------|
-|building_name      |VARCHAR  |-------|
-|telephone          |VARCHAR  |-------|
+|Column             |Type       |Options              |
+|id                 |integer    |PRIMARY KEY          |
+|user               |references |FOREIGN KEY          |
+|post_code          |string     |NOT NULL             |
+|prefectures        |string     |NOT NULL             |
+|area_id            |integer    |NOT NULL             |
+|building_name      |string     |---------------------|
+|telephone          |string     |NOT NULL             |
 
 ## purchases
-|Column             |Type     |Options|
-|id                 |INT      |-------|
-|user               |INT      |-------|
-|product            |VARCHAR  |-------|
+|Column             |Type       |Options              |
+|id                 |integer    |PRIMARY KEY          |
+|user               |references |FOREIGN KEY          |
+|product            |references |FOREIGN KEY          |
 
 ## products
-|Column             |Type     |Options|
-|id                 |INT      |-------|
-|user               |INT      |-------|
-|product_name       |VARCHAR  |-------|
-|detail             |VARCHAR  |-------|
-|category_id        |INT      |-------|
-|state_id           |INT      |-------|
-|burden_id          |INT      |-------|
-|area_id            |INT      |-------|
-|days_id            |INT      |-------|
-|price              |INT      |-------|
+|Column             |Type       |Options              |
+|id                 |integer    |PRIMARY KEY          |
+|user               |integer    |FOREIGN KEY          |
+|product_name       |string     |NOT NULL             |
+|detail             |string     |NOT NULL             |
+|category_id        |integer    |NOT NULL             |
+|state_id           |integer    |NOT NULL             |
+|burden_id          |integer    |NOT NULL             |
+|area_id            |integer    |NOT NULL             |
+|shipping_day_id    |integer    |NOT NULL             |
+|price              |integer    |NOT NULL             |
 
 ### Association
-（ここに追記していく）
-
+users(一)    と addresses(多)
+users(一)    と purchases(多)
+users(一)    と productes(多)
+products(一) と purchases(多)
 
