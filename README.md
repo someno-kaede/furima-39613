@@ -26,59 +26,59 @@ Things you may want to cover:
 ## Tabel名
 
 ## users
-|Column             |Type       |Options                 |
-|-------------------|-----------|------------------------|
-|nickname           |string     |null: false             |
-|email              |string     |null: false, UNIQUE KEY |
-|encrypted_password |string     |null: false             |
-|first_name         |string     |null: false             |
-|last_name          |string     |null: false             |
-|reading_first_name |string     |null: false             |
-|reading_last_name  |string     |null: false             |
-|birthday           |date       |null: false             |
+|Column             |Type       |Options                        |
+|-------------------|-----------|-------------------------------|
+|nickname           |string     |null: false                    |
+|email              |string     |null: false, unique_key: true  |
+|encrypted_password |string     |null: false                    |
+|first_name         |string     |null: false                    |
+|last_name          |string     |null: false                    |
+|reading_first_name |string     |null: false                    |
+|reading_last_name  |string     |null: false                    |
+|birthday           |date       |null: false                    |
 
 ### Association
-- has_many :addresses
 - has_many :purchases
 - has_many :productes
 
 ## addresses
-|Column             |Type       |Options                 |
-|-------------------|-----------|------------------------|
-|user               |references |foregin_key: true       |
-|post_code          |string     |null: false             |
-|prefectures        |string     |null: false             |
-|area_id            |integer    |null: false             |
-|building_name      |string     |                        |
-|telephone          |string     |null: false             |
+|Column             |Type       |Options                        |
+|-------------------|-----------|-------------------------------|
+|purchase           |references |foregin_key: true              |
+|post_code          |string     |null: false                    |
+|prefectures_id     |string     |null: false                    |
+|area               |integer    |null: false                    |
+|building_name      |string     |                               |
+|telephone          |string     |null: false                    |
 
 ### Association
-- belongs_to :users
+- belongs_to :purchase
 
 ## purchases
-|Column             |Type       |Options                 |
-|-------------------|-----------|------------------------|
-|user               |references |foregin_key: true       |
-|product            |references |foregin_key: true       |
+|Column             |Type       |Options                        |
+|-------------------|-----------|-------------------------------|
+|user               |references |null: false, foregin_key: true |
+|product            |references |null: false, foregin_key: true |
 
 ### Association
-- belongs_to :users
-- belongs_to :products
+- belongs_to: address
+- belongs_to :user
+- belongs_to :product
 
 ## products
-|Column             |Type       |Options                 |
-|-------------------|-----------|------------------------|
-|user               |integer    |foregin_key: true       |
-|product_name       |string     |null: false             |
-|detail             |string     |null: false             |
-|category_id        |integer    |null: false             |
-|state_id           |integer    |null: false             |
-|burden_id          |integer    |null: false             |
-|area_id            |integer    |null: false             |   
-|shipping_day_id    |integer    |null: false             |
-|price              |integer    |null: false             |
+|Column             |Type       |Options                        |
+|-------------------|-----------|-------------------------------|
+|user               |references |null: false, foregin_key: true |
+|product_name       |string     |null: false                    |
+|detail             |text       |null: false                    |
+|category_id        |integer    |null: false                    |
+|state_id           |integer    |null: false                    |
+|burden_id          |integer    |null: false                    |
+|area_id            |integer    |null: false                    | 
+|shipping_day_id    |integer    |null: false                    |
+|price              |integer    |null: false                    |
 
 ### Association
-- belongs_to :users
-- has_many :purchases
+- belongs_to :addresses
+- belongs_to :purchase
 
