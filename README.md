@@ -26,49 +26,59 @@ Things you may want to cover:
 ## Tabel名
 
 ## users
-|Column             |Type       |Options              |
-|id                 |integer    |PRIMARY KEY          |
-|nickname           |string     |NOT NULL             |
-|email              |string     |NOT NULL, UNIQUE KEY |
-|encrypted_password |string     |NOT NULL             |
-|first_name         |string     |NOT NULL             |
-|last_name          |string     |NOT NULL             |
-|reading_first_name |string     |NOT NULL             |
-|reading_last_name  |string     |NOT NULL             |
-|birthday           |date       |NOT NULL             |
-
-## addresses
-|Column             |Type       |Options              |
-|id                 |integer    |PRIMARY KEY          |
-|user               |references |FOREIGN KEY          |
-|post_code          |string     |NOT NULL             |
-|prefectures        |string     |NOT NULL             |
-|area_id            |integer    |NOT NULL             |
-|building_name      |string     |---------------------|
-|telephone          |string     |NOT NULL             |
-
-## purchases
-|Column             |Type       |Options              |
-|id                 |integer    |PRIMARY KEY          |
-|user               |references |FOREIGN KEY          |
-|product            |references |FOREIGN KEY          |
-
-## products
-|Column             |Type       |Options              |
-|id                 |integer    |PRIMARY KEY          |
-|user               |integer    |FOREIGN KEY          |
-|product_name       |string     |NOT NULL             |
-|detail             |string     |NOT NULL             |
-|category_id        |integer    |NOT NULL             |
-|state_id           |integer    |NOT NULL             |
-|burden_id          |integer    |NOT NULL             |
-|area_id            |integer    |NOT NULL             |
-|shipping_day_id    |integer    |NOT NULL             |
-|price              |integer    |NOT NULL             |
+|Column             |Type       |Options                 |
+|-------------------|-----------|------------------------|
+|nickname           |string     |null: false             |
+|email              |string     |null: false, UNIQUE KEY |
+|encrypted_password |string     |null: false             |
+|first_name         |string     |null: false             |
+|last_name          |string     |null: false             |
+|reading_first_name |string     |null: false             |
+|reading_last_name  |string     |null: false             |
+|birthday           |date       |null: false             |
 
 ### Association
-users(一)    と addresses(多)
-users(一)    と purchases(多)
-users(一)    と productes(多)
-products(一) と purchases(多)
+- has_many :addresses
+- has_many :purchases
+- has_many :productes
+
+## addresses
+|Column             |Type       |Options                 |
+|-------------------|-----------|------------------------|
+|user               |references |foregin_key: true       |
+|post_code          |string     |null: false             |
+|prefectures        |string     |null: false             |
+|area_id            |integer    |null: false             |
+|building_name      |string     |                        |
+|telephone          |string     |null: false             |
+
+### Association
+- belongs_to :users
+
+## purchases
+|Column             |Type       |Options                 |
+|-------------------|-----------|------------------------|
+|user               |references |foregin_key: true       |
+|product            |references |foregin_key: true       |
+
+### Association
+- belongs_to :users
+- belongs_to :products
+
+## products
+|Column             |Type       |Options                 |
+|-------------------|-----------|------------------------|
+|user               |integer    |foregin_key: true       |
+|product_name       |string     |null: false             |
+|detail             |string     |null: false             |
+|category_id        |integer    |null: false             |
+|state_id           |integer    |null: false             |
+|burden_id          |integer    |null: false             |
+|area_id            |integer    |null: false             |   
+|shipping_day_id    |integer    |null: false             |
+|price              |integer    |null: false             |
+
+### Association
+- belongs_to :users
+- has_many :purchases
 
