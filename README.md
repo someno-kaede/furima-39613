@@ -29,7 +29,7 @@ Things you may want to cover:
 |Column             |Type       |Options                        |
 |-------------------|-----------|-------------------------------|
 |nickname           |string     |null: false                    |
-|email              |string     |null: false, unique_key: true  |
+|email              |string     |null: false, unique: true      |
 |encrypted_password |string     |null: false                    |
 |first_name         |string     |null: false                    |
 |last_name          |string     |null: false                    |
@@ -46,7 +46,7 @@ Things you may want to cover:
 |-------------------|-----------|-------------------------------|
 |purchase           |references |foregin_key: true              |
 |post_code          |string     |null: false                    |
-|prefectures_id     |string     |null: false                    |
+|prefectures        |string     |null: false                    |
 |area               |integer    |null: false                    |
 |building_name      |string     |                               |
 |telephone          |string     |null: false                    |
@@ -61,7 +61,7 @@ Things you may want to cover:
 |product            |references |null: false, foregin_key: true |
 
 ### Association
-- belongs_to: address
+- has_one: address
 - belongs_to :user
 - belongs_to :product
 
@@ -79,6 +79,6 @@ Things you may want to cover:
 |price              |integer    |null: false                    |
 
 ### Association
-- belongs_to :addresses
-- belongs_to :purchase
+- belongs_to :user
+- has_one :purchase
 
