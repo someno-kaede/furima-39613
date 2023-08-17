@@ -7,7 +7,7 @@ FactoryBot.define do
     reading_last_name     {Gimei.name.first.katakana}
     birthday              {Faker::Date.between(from: 30.year.ago, to: 10.days.ago)}
     email                 {Faker::Internet.email}
-    password              {Faker::Internet.password(min_length: 6)}
+    password              {'1a' + Faker::Internet.password(min_length: 6)}
     password_confirmation {password}
   end
 end
