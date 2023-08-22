@@ -19,7 +19,8 @@ class Product < ApplicationRecord
   validates :burden_id, presence: true
   validates :prefecture_id, presence: true
   validates :shipping_day_id, presence: true
-  validates :price, presence: true
+  VAILD_PRICE_REGEX = /\A[0-9]+\z/
+  validates :price, presence: true, format: { with: VAILD_PRICE_REGEX }
   has_one_attached :image
   ##belongs_to :user
   ##has_one :purchase
