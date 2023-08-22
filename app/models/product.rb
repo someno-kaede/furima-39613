@@ -5,7 +5,7 @@ class Product < ApplicationRecord
   belongs_to :state
   belongs_to :burden
   belongs_to :prefecture
-  belongs_to :shipping_day
+  belongs_to :shippingday
   
   #ジャンルの選択が「---」の時は保存できないようにする
   validates :state_id, numericality: {other_than: 1, message: "can't be blank"}
