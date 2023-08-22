@@ -24,7 +24,9 @@ class Product < ApplicationRecord
   validates :shipping_day_id, presence: true
   VAILD_PRICE_REGEX = /\A[0-9]+\z/
   validates :price, presence: true, format: { with: VAILD_PRICE_REGEX }
+  validates_inclusion_of :price, in:300..9999999, message: "price outside the limits"
   has_one_attached :image
+  validates :image, presence: true
   ##belongs_to :user
   ##has_one :purchase
 end
