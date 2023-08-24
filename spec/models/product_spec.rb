@@ -14,10 +14,10 @@ RSpec.describe Product, type: :model do
 
     context '商品登録ができない' do       
       it '商品画像がないと登録ができない' do
-       @product.image.attach(io: File.open('README.md'), filename: 'README.md')
+       #仮
+       @product.image = nil
        @product.valid?
-       #expect(@product.errors.full_messages).to include("Image can't be blank")
-       expect(@product).to be_vaild
+       expect(@product.errors.full_messages).to include("Image can't be blank")
       end
 
       it '商品名がないと登録ができない' do
@@ -32,15 +32,23 @@ RSpec.describe Product, type: :model do
        expect(@product.errors.full_messages).to include("Detail can't be blank")
       end
       
+      it 'カテゴリーIDの項目がNULLだと登録ができない' do
+        @product.category_id = ''
+        @product.valid?
+        expect(@product.errors.full_messages).to include("Category can't be blank")
+      end
+  
       it 'カテゴリーIDの項目が「---」だと登録ができない(id:1)' do
         @product.category_id = 1
         @product.valid?
         expect(@product.errors.full_messages).to include("Category can't be blank")
       end
- 
-      #it 'カテゴリーIDに11項目が存在していること' do
-      #
-      #end
+  
+      it '商品の状態の項目がNULLだと登録ができない' do
+        @product.state_id = ''
+        @product.valid?
+        expect(@product.errors.full_messages).to include("State can't be blank")
+      end
  
       it '商品の状態の項目が「---」だと登録ができない(id:1)' do
         @product.state_id = 1
@@ -48,9 +56,11 @@ RSpec.describe Product, type: :model do
         expect(@product.errors.full_messages).to include("State can't be blank")
       end
  
-      #it '商品の状態に7項目が存在していること' do
-      #
-      #end
+      it '配送料の負担の項目がNULLだと登録ができない' do
+        @product.burden_id = ''
+        @product.valid?
+        expect(@product.errors.full_messages).to include("Burden can't be blank")
+      end
  
       it '配送料の負担の項目が「---」だと登録ができない(id:1)' do
         @product.burden_id = 1
@@ -58,9 +68,11 @@ RSpec.describe Product, type: :model do
         expect(@product.errors.full_messages).to include("Burden can't be blank")
       end
  
-      #it '配送料の負担に3項目が存在していること' do
-      #
-      #end
+      it '発送元の地域の項目がNULLだと登録ができない' do
+        @product.prefecture_id = ''
+        @product.valid?
+        expect(@product.errors.full_messages).to include("Prefecture can't be blank")
+      end
  
       it '発送元の地域の項目が「---」だと登録ができない(id:1)' do
         @product.prefecture_id = 1
@@ -68,20 +80,18 @@ RSpec.describe Product, type: :model do
         expect(@product.errors.full_messages).to include("Prefecture can't be blank")
       end
  
-      #it '発送元の地域に48項目が存在していること' do
-      #
-      #end
- 
+      it '発送までの日数の項目がNULLだと登録ができない' do
+        @product.shipping_day_id = ''
+        @product.valid?
+        expect(@product.errors.full_messages).to include("Shipping day can't be blank")
+      end
+  
       it '発送までの日数の項目が「---」だと登録ができない(id:1)' do
         @product.shipping_day_id = 1
         @product.valid?
         expect(@product.errors.full_messages).to include("Shipping day can't be blank")
       end
- 
-      #it '発送までの日数に48項目が存在していること' do
-      #
-      #end
- 
+  
       it '価格がないと登録ができない' do
         @product.price = ''
         @product.valid?
@@ -105,14 +115,6 @@ RSpec.describe Product, type: :model do
         @product.valid?
         expect(@product.errors.full_messages).to include("Price price outside the limits")
       end
-      
-      #it '販売手数料と利益の小数点以下は切り捨てて表示がされる' do
-      #
-      #end
-
-      #it '出品完了時にトップページに遷移する' do
-      #
-      #end
     end
   end
 end
