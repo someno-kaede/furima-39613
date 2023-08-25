@@ -3,7 +3,11 @@ Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
-  root "items#index"
+  root "products#index"
   #get 'items', to: 'items#index'
-  
+  #post 'items/new', to: 'items#new'
+  ##resources :items, only: [:index, :new, :create]
+  resources :products, only: [:index, :new, :create]
+
+  ##resources :products
 end
