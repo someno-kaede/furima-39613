@@ -22,8 +22,7 @@ class Product < ApplicationRecord
   validates :burden_id, presence: true
   validates :prefecture_id, presence: true
   validates :shipping_day_id, presence: true
-  VAILD_PRICE_REGEX = /\A[0-9]+\z/
-  validates :price, presence: true, format: { with: VAILD_PRICE_REGEX }
+  validates :price, presence: true, numericality: {only_integer: true, greater_than_or_equal_to: 0}
   validates_inclusion_of :price, in:300..9999999, message: "price outside the limits"
   has_one_attached :image
   validates :image, presence: true

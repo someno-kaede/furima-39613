@@ -15,7 +15,6 @@ RSpec.describe Product, type: :model do
     context '商品登録ができない' do 
       it 'ユーザー情報がないと登録ができない' do
        @product.user = nil
-      #  binding.pry
        @product.valid?
        expect(@product.errors.full_messages).to include("User must exist")
       end
@@ -114,6 +113,12 @@ RSpec.describe Product, type: :model do
         @product.price = Faker::Number.number(digits: 9)
         @product.valid?
         expect(@product.errors.full_messages).to include("Price price outside the limits")
+      end
+
+      it '価格が小数点を含むと登録できない' do
+        @product.price = Faker::Number.decimal(l_digits: 4, r_digits: 4)
+        @product.valid?
+        expect(@product.errors.full_messages).to include("Price must be an integer")
       end
 
       it '価格が半角でないと登録できない' do
