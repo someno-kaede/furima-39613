@@ -16,6 +16,6 @@ class User < ApplicationRecord
   validates :reading_last_name, presence: true, format: { with: VAILD_READING_NAME_REGEX, message: 'Last name kana is invalid. Input full-width katakana characters'}
   validates :birthday, presence: true
   #has_many :purchases
-  #has_many :productes
+  has_many :products
 
 end

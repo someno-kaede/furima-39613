@@ -12,7 +12,14 @@ RSpec.describe Product, type: :model do
       end
     end
 
-    context '商品登録ができない' do       
+    context '商品登録ができない' do 
+      it 'ユーザー情報がないと登録ができない' do
+       @product.user = nil
+      #  binding.pry
+       @product.valid?
+       expect(@product.errors.full_messages).to include("User must exist")
+      end
+
       it '商品画像がないと登録ができない' do
        @product.image = nil
        @product.valid?

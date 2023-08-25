@@ -27,6 +27,6 @@ class Product < ApplicationRecord
   validates_inclusion_of :price, in:300..9999999, message: "price outside the limits"
   has_one_attached :image
   validates :image, presence: true
-  ##belongs_to :user
+  belongs_to :user
   ##has_one :purchase
 end
