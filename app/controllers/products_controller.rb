@@ -27,6 +27,16 @@ class ProductsController < ApplicationController
     @shipping_day = Shippingday.find_by_id @products.shipping_day_id
   end
 
+  def edit
+    @product = Product.find(params[:id])
+  end
+
+  def update
+    @product = Product.find(params[:id])
+    @product.update(product_params)
+    redirect_to root_path
+  end
+
   private
 
   def product_params
