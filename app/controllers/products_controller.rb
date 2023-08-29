@@ -18,6 +18,15 @@ class ProductsController < ApplicationController
     end
   end
 
+  def show
+    @products = Product.find(params[:id])
+    @category = Category.find_by_id @products.category_id
+    @state = State.find_by_id @products.state_id
+    @burden = Burden.find_by_id @products.burden_id
+    @prefecture = Prefecture.find_by_id @products.prefecture_id
+    @shipping_day = Shippingday.find_by_id @products.shipping_day_id
+  end
+
   private
 
   def product_params
