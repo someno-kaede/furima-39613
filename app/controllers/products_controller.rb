@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-  before_action :set_product, only: [:edit, :update]
+  before_action :set_product, only: [:edit, :update, :show]
   before_action :authenticate_user!, only: [:new, :edit]
 
   def index
@@ -20,12 +20,11 @@ class ProductsController < ApplicationController
   end
 
   def show
-    @products = Product.find(params[:id])
-    @category = Category.find_by_id @products.category_id
-    @state = State.find_by_id @products.state_id
-    @burden = Burden.find_by_id @products.burden_id
-    @prefecture = Prefecture.find_by_id @products.prefecture_id
-    @shipping_day = Shippingday.find_by_id @products.shipping_day_id
+    @category = Category.find_by_id @product.category_id
+    @state = State.find_by_id @product.state_id
+    @burden = Burden.find_by_id @product.burden_id
+    @prefecture = Prefecture.find_by_id @product.prefecture_id
+    @shipping_day = Shippingday.find_by_id @product.shipping_day_id
   end
 
   def edit
