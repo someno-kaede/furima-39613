@@ -4,18 +4,18 @@
 <div class="item-show">
   <div class="item-box">
     <h2 class="name">
-      <%= @products.product_name %>
+      <%= @product.product_name %>
     </h2>
     <div class="item-img-content">
-      <%= image_tag @products.image ,class:"item-box-img" %>
+      <%= image_tag @product.image ,class:"item-box-img" %>
       <div class="sold-out">
-        <span>Sold Out!!</span>
+        <%#<span>Sold Out!!</span>%>
       </div>
     </div>
     <div class="item-price-box">
       <span class="item-price">
         ¥
-        <%= @products.price %>
+        <%= @product.price %>
       </span>
       <span class="item-postage">
         <%= @burden.name %>
@@ -23,8 +23,8 @@
     </div>
 
     <% if user_signed_in? %> <%# and 商品が出品中である %>
-      <% if current_user.id == @products.user_id %>
-        <%= link_to "商品の編集", "#", method: :get, class: "item-red-btn" %>
+      <% if current_user.id == @product.user_id %>
+        <%= link_to "商品の編集", edit_product_path(@product.id), method: :get, class: "item-red-btn" %>
         <p class="or-text">or</p>
         <%= link_to "削除", "#", method: :delete, class:"item-destroy" %>
       <% else %>
@@ -33,13 +33,13 @@
     <% end %>
 
     <div class="item-explain-box">
-      <span><%= @products.detail %></span>
+      <span><%= @product.detail %></span>
     </div>
     <table class="detail-table">
       <tbody>
         <tr>
           <th class="detail-item">出品者</th>
-          <td class="detail-value"><%= @products.user.nickname %></td>
+          <td class="detail-value"><%= @product.user.nickname %></td>
         </tr>
         <tr>
           <th class="detail-item">カテゴリー</th>
