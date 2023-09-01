@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
-  before_action :set_product, only: [:edit, :update, :show]
-  before_action :authenticate_user!, only: [:new, :edit]
+  before_action :set_product, only: [:edit, :update, :show, :destroy]
+  before_action :authenticate_user!, only: [:new, :edit, :destroy]
 
   def index
     @products = Product.order("created_at DESC")
@@ -39,6 +39,11 @@ class ProductsController < ApplicationController
     else
       render :edit, status: :unprocessable_entity
     end
+  end
+
+  def destroy
+    @product.destroy
+    redirect_to '/'
   end
 
   private
