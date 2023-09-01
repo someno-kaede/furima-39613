@@ -42,8 +42,10 @@ class ProductsController < ApplicationController
   end
 
   def destroy
-    @product.destroy
-    redirect_to '/'
+    if user_signed_in? && Product.find(params[:id]).user_id == current_user.id
+      @product.destroy
+      redirect_to '/'
+    end
   end
 
   private
