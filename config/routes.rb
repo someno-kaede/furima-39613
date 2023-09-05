@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   #post 'items/new', to: 'items#new'
   ##resources :items, only: [:index, :new, :create]
   resources :products, only: [:index, :new, :create, :show, :edit, :update, :destroy]
-  resources :purchase, only: [:index, :new, :create]
+  resources :purchase, only: [:index, :new, :create] do
+    resources :address
+  end
   ##resources :products
 end
