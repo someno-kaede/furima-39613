@@ -7,9 +7,8 @@ Rails.application.routes.draw do
   #get 'items', to: 'items#index'
   #post 'items/new', to: 'items#new'
   ##resources :items, only: [:index, :new, :create]
-  resources :products, only: [:index, :new, :create, :show, :edit, :update, :destroy]
-  resources :purchase, only: [:index, :new, :create] do
-    resources :address
+  resources :products, only: [:index, :new, :create, :show, :edit, :update, :destroy] do
+    resources :purchase, only: [:index, :create]
   end
   ##resources :products
 end

@@ -1,3 +1,4 @@
+<%= include_gon %>
 <%= render "shared/second-header"%>
 
 <div class='transaction-contents'>
@@ -7,14 +8,14 @@
     </h1>
     <%# 購入内容の表示 %>
     <div class='buy-item-info'>
-      <%= image_tag "item-sample.png", class: 'buy-item-img' %>
+      <%= image_tag @product.image, class: 'buy-item-img' %>
       <div class='buy-item-right-content'>
         <h2 class='buy-item-text'>
-          <%= "商品名" %>
+          <%= @product.product_name %>
         </h2>
         <div class='buy-item-price'>
-          <p class='item-price-text'>¥<%= '999,999,999' %></p>
-          <p class='item-price-sub-text'><%= '配送料負担' %></p>
+          <p class='item-price-text'>¥<%= @product.price %></p>
+          <p class='item-price-sub-text'><%= @burden.name %></p>
         </div>
       </div>
     </div>
@@ -26,12 +27,12 @@
         支払金額
       </h1>
       <p class='item-payment-price'>
-        ¥<%= "販売価格" %>
+        ¥<%= @product.price %>
       </p>
     </div>
     <%# /支払額の表示 %>
 
-    <%= form_with model: @purchase_address, url: @purchase_index_path, id: 'charge-form', class: 'transaction-form-wrap',local: true do |f| %>
+    <%= form_with model: @purchase_address, url: product_purchase_index_path, id: 'charge-form', class: 'transaction-form-wrap',local: true do |f| %>
     <%#= render 'error_messages', model: f.object %>
     <%# カード情報の入力 %>
     <div class='credit-card-form'>
