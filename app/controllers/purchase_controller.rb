@@ -24,6 +24,7 @@ class PurchaseController < ApplicationController
       return redirect_to root_path
     else
       gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
+      @burden = Burden.find_by_id @product.burden_id
       render :index, status: :unprocessable_entity
     end
   end

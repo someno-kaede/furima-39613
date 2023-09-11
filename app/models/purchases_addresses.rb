@@ -11,12 +11,15 @@ class PurchasesAddresses
 
   with_options presence: true do
     #validates :purchase_id
-    validates :post_code, presence: true
+    VALID_POST_CODE_REGEX = /\A^[0-9]{3}-[0-9]{4}$\z/
+    validates :post_code, presence: true, format: { with: VALID_POST_CODE_REGEX }
     validates :prefecture_id, presence: true
+    validates :prefecture_id, numericality: {other_than: 1, message: "can't be blank"}
     validates :municipalities, presence: true
     validates :area, presence: true
     validates :building_name
-    validates :telephone, presence: true
+    VALID_TELEPHONE_REGEX = /\A^[0-9]{10,11}$\z/
+    validates :telephone, presence: true, format: { with: VALID_TELEPHONE_REGEX }
   end
 
   def save
