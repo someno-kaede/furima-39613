@@ -95,12 +95,21 @@
     </form>
   </div>
   <div class="links">
-    <a href="#" class="change-item-btn">
-      ＜ 前の商品
-    </a>
-    <a href="#" class="change-item-btn">
-      後ろの商品 ＞
-    </a>
+    <% if Product.exists?(id: @product.id-1) == true %>
+      <%= link_to "＜ 前の商品", product_path(@product.id-1),  class: "change-item-btn" %>
+    <%else%>
+      <div class="none-change-item-btn">
+        ＜ 前の商品
+      </div>
+    <%end%>
+
+    <% if Product.exists?(id: @product.id+1) == true %>
+      <%= link_to "後ろの商品 ＞", product_path(@product.id+1),  class: "change-item-btn" %>
+    <%else%>
+      <div class="none-change-item-btn">
+        後ろの商品 ＞
+      </div>
+    <%end%>
   </div>
   <a href="#" class="another-item"><%= @category.name %>をもっと見る</a>
 </div>
