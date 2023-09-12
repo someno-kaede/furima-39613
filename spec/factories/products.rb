@@ -1,8 +1,8 @@
 FactoryBot.define do
   factory :product do
     association :user
-    product_name        {Faker::String.random(length: 3..12)}
-    detail              {Faker::String.random(length: 3..12)}
+    product_name        {"Faker::String.random(length: 3..12)"}
+    detail              {"Faker::String.random(length: 3..12)"}
     category_id         {Faker::Number.between(from: 2, to: 11)}
     state_id            {Faker::Number.between(from: 2, to: 7)}
     burden_id           {Faker::Number.between(from: 2, to: 3)}

@@ -157,9 +157,11 @@
           <div class='item-img-content'>
             <%= image_tag( product.image, class: :item_img, :size =>'200x200' ) %>
 
-            <%#<div class='sold-out'>
-              <%#<span>Sold Out!!</span>
-            <%#</div>%>
+            <% if Purchase.where(product_id: product.id).count >= 1 %>
+            <div class='sold-out'>
+              <span>Sold Out!!</span>
+            </div>
+            <%end%>
 
           </div>
           <div class='item-info'>

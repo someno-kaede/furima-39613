@@ -28,7 +28,7 @@ class ProductsController < ApplicationController
   end
 
   def edit
-    unless @product.user == current_user
+    unless @product.user == current_user && Purchase.where(product_id: @product.id).count == 0
       redirect_to '/'
     end
   end
@@ -42,7 +42,7 @@ class ProductsController < ApplicationController
   end
 
   def destroy
-    if user_signed_in? && Product.find(params[:id]).user_id == current_user.id
+    if user_signed_in? && Product.find(params[:id]).user_id == current_user.id && Purchase.where(product_id: @product.id).count == 0
       @product.destroy
       redirect_to '/'
     end
