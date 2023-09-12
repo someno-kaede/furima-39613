@@ -100,6 +100,18 @@ RSpec.describe PurchasesAddresses, type: :model do
         @purchases_addresses.valid?
         expect(@purchases_addresses.errors.full_messages).to include("Telephone is invalid")
       end
+
+      it 'userが紐づいていない場合'do
+        @purchases_addresses.user_id = ''
+        @purchases_addresses.valid?
+        expect(@purchases_addresses.errors.full_messages).to include("User can't be blank")
+      end
+
+      it 'productが紐づいていない場合'do
+        @purchases_addresses.product_id = ''
+        @purchases_addresses.valid?
+        expect(@purchases_addresses.errors.full_messages).to include("Product can't be blank")
+      end
     end
   end
 end
