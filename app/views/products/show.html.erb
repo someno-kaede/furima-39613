@@ -8,9 +8,13 @@
     </h2>
     <div class="item-img-content">
       <%= image_tag @product.image ,class:"item-box-img" %>
+
+      <% if Purchase.where(product_id: @product.id).count >= 1 %>
       <div class="sold-out">
-        <%#<span>Sold Out!!</span>%>
+        <span>Sold Out!!</span>
       </div>
+      <%end%>
+
     </div>
     <div class="item-price-box">
       <span class="item-price">
