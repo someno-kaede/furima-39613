@@ -5,9 +5,11 @@ class PurchaseController < ApplicationController
     gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
     @product = Product.find(params[:product_id])
     @burden = Burden.find_by_id @product.burden_id
-    if @product.user == current_user
+
+    if @product.user == current_user || Purchase.where(product_id: @product.id).count >= 1
       redirect_to '/'
     end
+
     @purchase_address = PurchasesAddresses.new
   end
 
