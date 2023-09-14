@@ -1,0 +1,79 @@
+<%= render "shared/second-header"%>
+
+<div class='transaction-contents'>
+  <div class='transaction-main'>
+    <h1 class='transaction-title-text'>
+      <%= @user.nickname %> の出品商品
+    </h1>
+  </div>
+</div>
+
+<%# 商品一覧 %>
+<div class='item-contents'>
+  <%# 商品テーブルが空の時の分岐 %>
+  <% if @products.empty? %>
+    <% #ダミー商品の表示 %>
+    <ul class='item-lists'>
+      <li class='list'>
+        <%= link_to '#' do %>
+        <%= image_tag "https://tech-master.s3.amazonaws.com/uploads/curriculums/images/Rails1-4/sample.jpg", class: "item-img" %>
+        <div class='item-info'>
+          <h3 class='item-name'>
+            商品を出品してね！
+          </h3>
+          <div class='item-price'>
+            <span>99999999円<br>(税込み)</span>
+            <div class='star-btn'>
+              <%= image_tag "star.png", class:"star-icon" %>
+              <span class='star-count'>0</span>
+            </div>
+          </div>
+        </div>
+        <% end %>
+      </li>
+    </ul>
+  <%else%>
+    <%#商品テーブルの表示%>
+    <ul class='item-lists'>
+      <% @products.each do |product| %>
+      <% if product.user_id == @user.id %>
+        <li class='list'>
+          <%= link_to "/products/#{product.id}" do %>
+          <div class='item-img-content'>
+            <%= image_tag( product.image, class: :item_img, :size =>'200x200' ) %>
+
+            <% if Purchase.where(product_id: product.id).count >= 1 %>
+            <div class='sold-out'>
+              <span>Sold Out!!</span>
+            </div>
+            <%end%>
+
+          </div>
+          <div class='item-info'>
+            <h3 class='item-name'>
+              <%= product.product_name %>
+            </h3>
+            <div class='item-price'>
+              <% if product.burden_id == 2 %>
+                <span><%= product.price %>円<br><%= '着払い' %></span>
+              <% elsif product.burden_id == 3 %>
+                <span><%= product.price %>円<br><%= '送料込み' %></span>
+              <%end%>
+              <div class='star-btn'>
+                <%= image_tag "star.png", class:"star-icon" %>
+                <span class='star-count'>0</span>
+              </div>
+            </div>
+          </div>
+          <%end%>
+        <%end%>
+      <%end%>
+    </ul>
+  <%end%>
+</div>
+<%# /商品一覧 %>
+
+
+<%= render "shared/second-footer" %>
+
+
