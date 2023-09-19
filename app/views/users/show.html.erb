@@ -98,7 +98,7 @@
               <%end%>
               <div class='star-btn'>
                 <%= image_tag "star.png", class:"star-icon" %>
-                <span class='star-count'>0</span>
+                <span class='star-count'><%= product.likes.count %></span>
               </div>
             </div>
           </div>
@@ -106,15 +106,16 @@
         <%end%>
       <%end%>
     </ul>
+
     <div class='transaction-main'>
       <h1 class='transaction-title-text'>
         いいね登録商品
       </h1>
     </div>
-    <%#商品テーブルの表示%>
+    <%#商品テーブルの表示(お気に入り登録したもののみ)%>
     <ul class='item-lists'>
       <% @products.each do |product| %>
-      <% if product.user_id == @user.id %>
+      <% if Like.exists?(user_id: @user.id, product_id: product.id) %>
         <li class='list'>
           <%= link_to "/products/#{product.id}" do %>
           <div class='item-img-content'>
@@ -139,7 +140,7 @@
               <%end%>
               <div class='star-btn'>
                 <%= image_tag "star.png", class:"star-icon" %>
-                <span class='star-count'>0</span>
+                <span class='star-count'><%= product.likes.count %></span>
               </div>
             </div>
           </div>
