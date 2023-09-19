@@ -17,6 +17,7 @@ class User < ApplicationRecord
   validates :birthday, presence: true
   #has_many :purchases
   has_many :products
+  has_many :likes
 
   has_many :active_relationships, class_name: "Relationship", foreign_key: :following_id
   has_many :followings, through: :active_relationships, source: :follower
