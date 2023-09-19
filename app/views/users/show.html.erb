@@ -1,14 +1,5 @@
 <%= render "shared/second-header"%>
 
-  <h3>フォロー</h3>
-  <% @user.followings.each do |user| %>
-    <p class=“f-user”><%= link_to user.nickname, user_path(user.id) %></p>
-  <% end %>
-  <h3>フォロワー</h3>
-  <% @user.followers.each do |user| %>
-    <p class=“f-user”><%= link_to user.nickname, user_path(user.id) %></p>
-  <% end %>
-
 <div class="item-show">
   <div class='item-contents'>
     <div class='transaction-main'>
@@ -16,19 +7,30 @@
       <h1 class='transaction-title-text'>
         マイページ
       </h1>
-    <% elsif user_signed_in? && current_user != @user %>
+    <% elsif current_user != @user %>
       <h1 class='transaction-title-text'>
         ユーザーページ
       </h1>
     <% end %>
     </div>
+
     <div class="item-explain-box">
       <span><%= @user.nickname %></span>
     </div>
-    <div class="item-explain-box">
-      <span><%= @user.followings.count %> フォロー中 ／</span>
-      <span><%= @user.followers.count %> フォロワー</span>
-    </div>
+
+    <details>
+      <summary><%= @user.followings.count %> フォロー中 </summary>
+      <% @user.followings.each do |user| %>
+        <p class=“f-user”><%= link_to user.nickname, user_path(user.id) %></p>
+      <% end %>
+    </details>
+
+    <details>
+      <summary><%= @user.followers.count %> フォロワー</summary>
+      <% @user.followers.each do |user| %>
+        <p class=“f-user”><%= link_to user.nickname, user_path(user.id) %></p>
+      <% end %>
+    </details>
 
     <% if user_signed_in? && current_user.id == @user.id %>
       <div class="item-box">
@@ -111,5 +113,12 @@
   </div>
   <%# /商品一覧 %>
 </div>
+
+<% if user_signed_in? && current_user.id == @user.id %>
+  <%= link_to(new_product_path, class: 'purchase-btn') do %>
+    <span class='purchase-btn-text'>出品する</span>
+    <%= image_tag 'icon_camera.png' , size: '185x50' ,class: "purchase-btn-icon" %>
+  <% end %>
+<% end %>
 
 <%= render "shared/second-footer" %>
