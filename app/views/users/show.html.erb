@@ -18,18 +18,38 @@
       <span><%= @user.nickname %></span>
     </div>
 
+    <% @user.followings.each do |user| %>
+      <% if user.id == current_user.id %>
+        <div class="item-explain-box">
+          <span>[フォローされています]</span>
+        </div>
+      <% end %>
+    <% end %>
+
     <details>
       <summary><%= @user.followings.count %> フォロー中 </summary>
-      <% @user.followings.each do |user| %>
-        <p class=“f-user”><%= link_to user.nickname, user_path(user.id) %></p>
-      <% end %>
+        <table class="detail-table">
+          <tbody>
+            <% @user.followings.each do |user| %>
+            <tr>
+              <td class="detail-value"><%= link_to user.nickname, user_path(user.id) %></td>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
     </details>
 
     <details>
       <summary><%= @user.followers.count %> フォロワー</summary>
-      <% @user.followers.each do |user| %>
-        <p class=“f-user”><%= link_to user.nickname, user_path(user.id) %></p>
-      <% end %>
+        <table class="detail-table">
+          <tbody>
+            <% @user.followers.each do |user| %>
+            <tr>
+              <td class="detail-value"><%= link_to user.nickname, user_path(user.id) %></td>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
     </details>
 
     <% if user_signed_in? && current_user.id == @user.id %>
@@ -110,6 +130,13 @@
         <%end%>
       </ul>
     <%end%>
+
+    <% if user_signed_in? && current_user.id != @user.id %>
+      <div class="item-box">
+        <%= link_to "ユーザーをブロック", root_path, class: "item-red-btn" %>
+      </div>
+    <% end %>
+    
   </div>
   <%# /商品一覧 %>
 </div>
