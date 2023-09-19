@@ -129,14 +129,7 @@
           <%end%>
         <%end%>
       </ul>
-    <%end%>
-
-    <% if user_signed_in? && current_user.id != @user.id %>
-      <div class="item-box">
-        <%= link_to "ユーザーをブロック", root_path, class: "item-red-btn" %>
-      </div>
-    <% end %>
-    
+    <%end%>    
   </div>
   <%# /商品一覧 %>
 </div>
