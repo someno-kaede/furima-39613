@@ -11,4 +11,8 @@ Rails.application.routes.draw do
     resources :purchase, only: [:index, :create]
   end
   ##resources :products
+  resources :users, only: :show
+  resources :users do
+    resource :relationships, only: [:create, :destroy]
+  end
 end

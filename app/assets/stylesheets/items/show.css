@@ -60,6 +60,26 @@
   padding: 2vh 10vw;
 }
 
+.item-blue-btn {
+  text-align: center;
+  background-color: #2cbabe;
+  font-size: 24px;
+  font-weight: bold;
+  color: #FFF;
+  margin: 20px 0px;
+  padding: 2vh 10vw;
+}
+
+.item-green-btn {
+  text-align: center;
+  background-color: #82ae46;
+  font-size: 24px;
+  font-weight: bold;
+  color: #FFF;
+  margin: 20px 0px;
+  padding: 2vh 10vw;
+}
+
 .or-text {
   font-size: 20px;
 }
@@ -195,6 +215,12 @@
   font-size: 30px;
   text-decoration: none;
   color: #3CCACE;
+}
+
+.none-change-item-btn {
+  font-size: 30px;
+  text-decoration: none;
+  color: #9f9f9f;
 }
 
 .another-item {
