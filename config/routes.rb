@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   ##resources :items, only: [:index, :new, :create]
   resources :products, only: [:index, :new, :create, :show, :edit, :update, :destroy] do
     resources :purchase, only: [:index, :create]
+    resource :likes, only: [:create, :destroy]
   end
   ##resources :products
   resources :users, only: :show

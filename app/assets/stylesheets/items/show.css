@@ -137,6 +137,14 @@
   margin-right: 20px;
 }
 
+.favorite-text {
+  color: rgb(249, 75, 0);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 20px;
+}
+
 .favorite-star-icon {
   margin-right: 5px;
 }
