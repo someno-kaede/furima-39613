@@ -4,28 +4,37 @@
   <% @user.followings.each do |user| %>
     <p class=“f-user”><%= link_to user.nickname, user_path(user.id) %></p>
   <% end %>
-  <%= @user.followings.count %>
   <h3>フォロワー</h3>
   <% @user.followers.each do |user| %>
     <p class=“f-user”><%= link_to user.nickname, user_path(user.id) %></p>
   <% end %>
-  <%= @user.followers.count %>
 
 <div class="item-show">
   <div class='item-contents'>
     <div class='transaction-main'>
+    <% if user_signed_in? && current_user.id == @user.id %>
+      <h1 class='transaction-title-text'>
+        マイページ
+      </h1>
+    <% elsif user_signed_in? && current_user != @user %>
       <h1 class='transaction-title-text'>
         ユーザーページ
       </h1>
+    <% end %>
     </div>
     <div class="item-explain-box">
       <span><%= @user.nickname %></span>
     </div>
-    <% if current_user.id == @user.id %>
+    <div class="item-explain-box">
+      <span><%= @user.followings.count %> フォロー中 ／</span>
+      <span><%= @user.followers.count %> フォロワー</span>
+    </div>
+
+    <% if user_signed_in? && current_user.id == @user.id %>
       <div class="item-box">
         <%= link_to "ユーザー情報の編集", edit_user_registration_path, class: "item-blue-btn" %>
       </div>
-    <% elsif current_user != @user %>
+    <% elsif user_signed_in? && current_user != @user %>
       <% if @user.followed_by?(current_user) %>
         <%=link_to "フォロー中", user_relationships_path(@user.id),class: "item-green-btn", data: { turbo_method: :delete } %>
       <% else %>
