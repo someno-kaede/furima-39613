@@ -1,0 +1,54 @@
+<%= render "shared/second-header"%>
+
+<div class="item-show">
+  <div class='item-contents'>
+    <div class='transaction-main'>
+      <h1 class='transaction-title-text'>
+        カテゴリーページ
+      </h1>
+    </div>
+
+    <div class='transaction-main'>
+      <h1 class='transaction-title-text'>
+        出品商品
+      </h1>
+    </div>
+    <%# 商品一覧 %>
+    <%#商品テーブルの表示%>
+    <ul class='item-lists'>
+      <% @products.each do |product| %>
+        <li class='list'>
+          <%= link_to "/products/#{product.id}" do %>
+          <div class='item-img-content'>
+            <%= image_tag( product.image, class: :item_img, :size =>'200x200' ) %>
+
+            <% if Purchase.where(product_id: product.id).count >= 1 %>
+            <div class='sold-out'>
+              <span>Sold Out!!</span>
+            </div>
+            <%end%>
+
+          </div>
+          <div class='item-info'>
+            <h3 class='item-name'>
+              <%= product.product_name %>
+            </h3>
+            <div class='item-price'>
+              <% if product.burden_id == 2 %>
+                <span><%= product.price %>円<br><%= '着払い' %></span>
+              <% elsif product.burden_id == 3 %>
+                <span><%= product.price %>円<br><%= '送料込み' %></span>
+              <%end%>
+              <div class='star-btn'>
+                <%= image_tag "star.png", class:"star-icon" %>
+                <span class='star-count'><%= product.likes.count %></span>
+              </div>
+            </div>
+          </div>
+          <%end%>
+        <%end%>
+      </ul>
+   </div>
+</div>
+
+<%= render "shared/second-footer" %>
