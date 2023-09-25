@@ -4,10 +4,7 @@
   <div class='item-contents'>
     <div class='transaction-main'>
       <h1 class='transaction-title-text'>
-        <% @categories.each do |category| %>
-          <%# ここに繰り返し処理を記述する %>
-          <%= category.name %>
-        <% end %>
+        <%= @category.name + "のカテゴリーページ" %>
       </h1>
     </div>
 
@@ -16,44 +13,20 @@
       <div class="item-explain-box">
         <table class="detail-table">
           <tbody>
-
-            <% if @category.id != 2 %>
-              <tr>
-                <td class="detail-value"><%= link_to "メンズ", "/categories/2" %></td>
-              </tr>
-            <% else %>
-              <tr>
-                <td class="detail-value">メンズ</td>
-              </tr>
+            <% @categories.each do |category| %>
+              <%# ここに繰り返し処理を記述する %>
+              <% if category.id != 1 %>
+                <% if category.id != @category.id %>
+                  <tr>
+                    <td class="detail-value"><%= link_to category.name, "/categories/#{category.id}" %></td>
+                  </tr>
+                <% else %>
+                  <tr>
+                    <td class="detail-value"><%= category.name %></td>
+                  </tr>
+                <% end %>
+              <% end %>
             <% end %>
-
-            <tr>
-              <td class="detail-value"><%= link_to "レディース", "/categories/3" %></td>
-            </tr>
-            <tr>
-              <td class="detail-value"><%= link_to "ベビー・キッズ", "/categories/4" %></td>
-            </tr>
-            <tr>
-              <td class="detail-value"><%= link_to "インテリア・住まい・小物", "/categories/5" %></td>
-            </tr>
-            <tr>
-              <td class="detail-value"><%= link_to "本・音楽・ゲーム", "/categories/6" %></td>
-            </tr>
-            <tr>
-              <td class="detail-value"><%= link_to "おもちゃ・ホビー・グッズ", "/categories/7" %></td>
-            </tr>
-            <tr>
-              <td class="detail-value"><%= link_to "家電・スマホ・カメラ", "/categories/8" %></td>
-            </tr>
-            <tr>
-              <td class="detail-value"><%= link_to "スポーツ・レジャー", "/categories/9" %></td>
-            </tr>
-            <tr>
-              <td class="detail-value"><%= link_to "ハンドメイド", "/categories/10" %></td>
-            </tr>
-            <tr>
-              <td class="detail-value"><%= link_to "その他", "/categories/11" %></td>
-            </tr>
           </tbody>
         </table>
       </div>
