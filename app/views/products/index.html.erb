@@ -175,7 +175,11 @@
                 <span><%= product.price %>円<br><%= '送料込み' %></span>
               <%end%>
               <div class='star-btn'>
-                <%= image_tag "star.png", class:"star-icon" %>
+                <% if user_signed_in? && product.liked_by?(current_user)%>
+                  <%= image_tag "star_like.png", class:"star-icon" %>
+                <% else %>
+                  <%= image_tag "star.png", class:"star-icon" %>
+                <% end %>
                 <span class='star-count'><%= product.likes.count %></span>
               </div>
             </div>

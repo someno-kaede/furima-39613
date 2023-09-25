@@ -1,0 +1,29 @@
+<%= render "shared/second-header"%>
+
+<div class="item-show">
+  <div class='item-contents'>
+    <div class='transaction-main'>
+      <h1 class='transaction-title-text'>
+        <%= "カテゴリートップページ" %>
+      </h1>
+    </div>
+    <div class="item-explain-box">
+      <table class="detail-table">
+        <tbody>
+          <% @categories.each do |category| %>
+            <%# ここに繰り返し処理を記述する %>
+            <% if category.id != 1 %>
+              <tr>
+                <td class="detail-value"><%= link_to category.name , "/categories/#{category.id}" %></td>
+                <th class="detail-item"><%= Product.where(category_id: category.id).count %>件</th>
+              </tr>
+            <% end %>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+    
+<%= render "shared/second-footer" %>
+

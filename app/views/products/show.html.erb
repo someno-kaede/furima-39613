@@ -69,12 +69,14 @@
     </table>
     <div class="option">
       <div class="favorite-btn">
-        <%= image_tag "star.png" ,class:"favorite-star-icon" ,width:"20",height:"20"%>
         <% if user_signed_in? && @product.liked_by?(current_user)%>
+          <%= image_tag "star_like.png" ,class:"favorite-star-icon" ,width:"20",height:"20"%>
           <%=link_to "いいね済", product_likes_path(@product.id),  data: { turbo_method: :delete }, class: "favorite-text" %>
         <% elsif user_signed_in? == false %>
+          <%= image_tag "star.png" ,class:"favorite-star-icon" ,width:"20",height:"20"%>
           <span>いいねする </span>
         <% else %>
+          <%= image_tag "star.png" ,class:"favorite-star-icon" ,width:"20",height:"20"%>
           <%=link_to "いいねする", product_likes_path(@product.id), data: { turbo_method: :post }, class: "favorite-text"  %>
         <% end %>
         <%= @product.likes.count %>
