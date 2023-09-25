@@ -28,28 +28,28 @@
 
     <details>
       <summary><%= @user.followings.count %> フォロー中 </summary>
-        <table class="detail-table">
-          <tbody>
-            <% @user.followings.each do |user| %>
-            <tr>
-              <td class="detail-value"><%= link_to user.nickname, user_path(user.id) %></td>
-            </tr>
-            <% end %>
-          </tbody>
-        </table>
+      <table class="detail-table">
+        <tbody>
+          <% @user.followings.each do |user| %>
+          <tr>
+            <td class="detail-value"><%= link_to user.nickname, user_path(user.id) %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
     </details>
 
     <details>
       <summary><%= @user.followers.count %> フォロワー</summary>
-        <table class="detail-table">
-          <tbody>
-            <% @user.followers.each do |user| %>
-            <tr>
-              <td class="detail-value"><%= link_to user.nickname, user_path(user.id) %></td>
-            </tr>
-            <% end %>
-          </tbody>
-        </table>
+      <table class="detail-table">
+        <tbody>
+          <% @user.followers.each do |user| %>
+          <tr>
+            <td class="detail-value"><%= link_to user.nickname, user_path(user.id) %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
     </details>
 
     <% if user_signed_in? && current_user.id == @user.id %>
