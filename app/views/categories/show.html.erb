@@ -4,47 +4,95 @@
   <div class='item-contents'>
     <div class='transaction-main'>
       <h1 class='transaction-title-text'>
-        カテゴリーページ
+        <% @categories.each do |category| %>
+          <%# ここに繰り返し処理を記述する %>
+          <%= category.name %>
+        <% end %>
       </h1>
     </div>
 
-    <div class='transaction-main'>
-      <h1 class='transaction-title-text'>
-        出品商品
-      </h1>
-    </div>
+    <details>
+      <summary>他のカテゴリーを見る</summary>
+      <div class="item-explain-box">
+        <table class="detail-table">
+          <tbody>
+
+            <% if @category.id != 2 %>
+              <tr>
+                <td class="detail-value"><%= link_to "メンズ", "/categories/2" %></td>
+              </tr>
+            <% else %>
+              <tr>
+                <td class="detail-value">メンズ</td>
+              </tr>
+            <% end %>
+
+            <tr>
+              <td class="detail-value"><%= link_to "レディース", "/categories/3" %></td>
+            </tr>
+            <tr>
+              <td class="detail-value"><%= link_to "ベビー・キッズ", "/categories/4" %></td>
+            </tr>
+            <tr>
+              <td class="detail-value"><%= link_to "インテリア・住まい・小物", "/categories/5" %></td>
+            </tr>
+            <tr>
+              <td class="detail-value"><%= link_to "本・音楽・ゲーム", "/categories/6" %></td>
+            </tr>
+            <tr>
+              <td class="detail-value"><%= link_to "おもちゃ・ホビー・グッズ", "/categories/7" %></td>
+            </tr>
+            <tr>
+              <td class="detail-value"><%= link_to "家電・スマホ・カメラ", "/categories/8" %></td>
+            </tr>
+            <tr>
+              <td class="detail-value"><%= link_to "スポーツ・レジャー", "/categories/9" %></td>
+            </tr>
+            <tr>
+              <td class="detail-value"><%= link_to "ハンドメイド", "/categories/10" %></td>
+            </tr>
+            <tr>
+              <td class="detail-value"><%= link_to "その他", "/categories/11" %></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </details>
+
     <%# 商品一覧 %>
     <%#商品テーブルの表示%>
     <ul class='item-lists'>
       <% @products.each do |product| %>
-        <li class='list'>
-          <%= link_to "/products/#{product.id}" do %>
-          <div class='item-img-content'>
-            <%= image_tag( product.image, class: :item_img, :size =>'200x200' ) %>
+        <% if product.category_id == @category.id %>
+          <li class='list'>
+            <%= link_to "/products/#{product.id}" do %>
+            <div class='item-img-content'>
+              <%= image_tag( product.image, class: :item_img, :size =>'200x200' ) %>
 
-            <% if Purchase.where(product_id: product.id).count >= 1 %>
-            <div class='sold-out'>
-              <span>Sold Out!!</span>
-            </div>
-            <%end%>
-
-          </div>
-          <div class='item-info'>
-            <h3 class='item-name'>
-              <%= product.product_name %>
-            </h3>
-            <div class='item-price'>
-              <% if product.burden_id == 2 %>
-                <span><%= product.price %>円<br><%= '着払い' %></span>
-              <% elsif product.burden_id == 3 %>
-                <span><%= product.price %>円<br><%= '送料込み' %></span>
+              <% if Purchase.where(product_id: product.id).count >= 1 %>
+              <div class='sold-out'>
+                <span>Sold Out!!</span>
+              </div>
               <%end%>
-              <div class='star-btn'>
-                <%= image_tag "star.png", class:"star-icon" %>
-                <span class='star-count'><%= product.likes.count %></span>
+
+            </div>
+            <div class='item-info'>
+              <h3 class='item-name'>
+                <%= product.product_name %>
+              </h3>
+              <div class='item-price'>
+                <% if product.burden_id == 2 %>
+                  <span><%= product.price %>円<br><%= '着払い' %></span>
+                <% elsif product.burden_id == 3 %>
+                  <span><%= product.price %>円<br><%= '送料込み' %></span>
+                <%end%>
+                <div class='star-btn'>
+                  <%= image_tag "star.png", class:"star-icon" %>
+                  <span class='star-count'><%= product.likes.count %></span>
+                </div>
               </div>
             </div>
-          </div>
+            <%end%>
           <%end%>
         <%end%>
       </ul>
